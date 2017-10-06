@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.ICustomLanguageProject">
+    <Position X="4.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAAAAABoAAAACEAAAAAAAIAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Interfaces\ICustomLanguageProject.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.IReferenceStringProvider">
+    <Position X="10.75" Y="3.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IReferenceStringProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.ITranslation">
+    <Position X="10.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAASAAAAAAAACIAAAAAAAAgAAAAAAA=</HashCode>
+      <FileName>Interfaces\ITranslation.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.ILanguageStringCollection">
+    <Position X="4.5" Y="3.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAACAAAAAACAAAAAAAAAAAAAAAAAAEAAAAAAAg=</HashCode>
+      <FileName>Interfaces\ILanguageStringCollection.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.ILanguageFileGenerator">
+    <Position X="1" Y="5.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ILanguageFileGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.IDeviceStringReader">
+    <Position X="8" Y="4.75" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAACAAAAAA=</HashCode>
+      <FileName>Interfaces\IDeviceStringReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.IDeviceXmlProvider">
+    <Position X="10.75" Y="4.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Interfaces\IDeviceXmlProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.IDriveCustomizationStringReader">
+    <Position X="8" Y="6.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IDriveCustomizationStringReader.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="AC30CustomLanguageInterfaces.Interfaces.IDriveCustomizationXmlProvider">
+    <Position X="10.75" Y="6.5" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Interfaces\IDriveCustomizationXmlProvider.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -1,0 +1,142 @@
+﻿<UserControl x:Class="AC30CustomLanguageManager.Views.LanguageEditorUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
+             xmlns:vm="clr-namespace:AC30CustomLanguageManager.ViewModels"
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="600">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/AC30CustomLanguageManager;component/Resources/TelerikResourceDictionary.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <DockPanel LastChildFill="True" DataContext="{Binding MainViewModel, Source={StaticResource Locator}}" Margin="10">
+        <Grid DockPanel.Dock="Top">
+            <StackPanel Orientation="Horizontal" Margin="0,0,0,2">
+                <DockPanel Width="{Binding ElementName=idCol,Path=ActualWidth}">
+                    <telerik:RadMenu x:Name="radMenu" Width="Auto" HorizontalAlignment="Left">
+                        <telerik:RadMenuItem Header="File">
+                            <telerik:RadMenuItem Header="New Language Project" Command="{Binding NewLanguageStringProjectCommand}"/>
+                            <telerik:RadMenuItem Header="Open Language Project" Command="{Binding OpenLanguageStringProjectCommand}"/>
+                            <telerik:RadMenuItem Header="Save language Project" Command="{Binding SaveLanguageStringProjectCommand}" />
+                            <telerik:RadMenuItem Header="Import Strings From Device Xml" Command="{Binding ImportDeviceXmlCommand}"/>
+                            <telerik:RadMenuItem Header="Import Strings From DriveCustomization" Command="{Binding ImportDriveCustomizationXmlCommand}"/>
+                            <telerik:RadMenuItem Header="Language Files">
+                                <telerik:RadMenuItem Header="Create All Language File" Command="{Binding CreateLanguageFileCommand}" CommandParameter="All"/>
+                                <telerik:RadMenuItem Header="Create Selected Language File" Command="{Binding CreateLanguageFileCommand}" />
+                            </telerik:RadMenuItem>
+                        </telerik:RadMenuItem>
+                    </telerik:RadMenu>
+                    <telerik:RadToggleButton DockPanel.Dock="Right" Width="22" Height="22" IsChecked="{Binding EditingLanguages}" HorizontalAlignment="Right">
+                        <Image Source="../Resources/Images/world.ico"/>
+                    </telerik:RadToggleButton>
+                    <telerik:RadToggleButton DockPanel.Dock="Right" Height="22" MinWidth="35" HorizontalAlignment="Right" 
+                            Visibility="{Binding ShowStringFilterButton,Converter={StaticResource boolToVisConverter}}"
+                            IsChecked="{Binding StringTypeFilter}" IsThreeState="True" ToolTip="Filter to show All, Fixed or Soft (Drive Customization) strings">
+                        <telerik:RadToggleButton.Style>
+                            <Style TargetType="{x:Type telerik:RadToggleButton}" BasedOn="{StaticResource RadToggleButtonStyle}">
+                                <Setter Property="Content" Value="All"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Path=StringTypeFilter}" Value="False">
+                                        <Setter Property="Content" Value="Fixed" />
+                                    </DataTrigger>
+                                    <DataTrigger Binding="{Binding Path=StringTypeFilter}" Value="True">
+                                        <Setter Property="Content" Value="Soft" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </telerik:RadToggleButton.Style>
+                    </telerik:RadToggleButton>
+                </DockPanel>
+                <telerik:RadComboBox Margin="0" Height="22" Width="{Binding ElementName=refCol,Path=ActualWidth}" Grid.Column="1" ItemsSource="{Binding Languages,Mode=OneWay}" SelectedItem="{Binding SelectedReferenceLanguage}">
+                    <telerik:RadComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock MinWidth="10" Text="{Binding Index}"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:RadComboBox.ItemTemplate>
+                </telerik:RadComboBox>
+                <telerik:RadComboBox Margin="0" Height="22" Width="{Binding ElementName=stringCol,Path=ActualWidth}" Grid.Column="2" ItemsSource="{Binding Languages,Mode=OneWay}" SelectedItem="{Binding SelectedLanguage}">
+                    <telerik:RadComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock MinWidth="10" Text="{Binding Index}"/>
+                                <TextBlock Text="{Binding Name}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </telerik:RadComboBox.ItemTemplate>
+                </telerik:RadComboBox>
+            </StackPanel>
+        </Grid>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"/>
+                <ColumnDefinition Width="89*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <telerik:RadGridView x:Name="grid1" GroupRenderMode="Flat" ItemsSource="{Binding SelectedTranslationsView}" Margin="0" 
+                                 SelectionUnit="Mixed"
+                                 SelectionMode="Extended"
+                                 ClipboardCopyMode="Cells"
+                                 ClipboardPasteMode="AllSelectedCells" 
+                            BorderBrush="Gray"
+                            ShowGroupPanel="False"
+                            BorderThickness="1"
+                            CanUserReorderColumns="False" 
+                            CanUserFreezeColumns="False"
+                            RowIndicatorVisibility="Collapsed"
+                            RowDetailsVisibilityMode="Visible"
+                            IsReadOnly="False"
+                            AutoGenerateColumns="False" EnableRowVirtualization="True" EnableColumnVirtualization="True" 
+                            FontSize="12" RowHeight="18" Grid.ColumnSpan="2">
+                <telerik:RadGridView.InputBindings>
+                    <KeyBinding Command="{Binding DeleteTranslationCommand}" Key="Delete" />
+                </telerik:RadGridView.InputBindings>
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Pasting" >
+                        <i:InvokeCommandAction Command="{Binding PastingEventCommand}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+                <i:Interaction.Behaviors>
+                    <vm:MyMultiSelectBehaviour SelectedItems="{Binding SelectedItems}"/>
+                </i:Interaction.Behaviors>
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu Opened="RadContextMenu_Opened">
+                        <telerik:RadMenuItem Header="Cut"/>
+                        <telerik:RadMenuItem Header="Copy" Command="telerikGrid:RadGridViewCommands.Copy" CommandTarget="{Binding ElementName=rgvIsolateLookup}"/>
+                        <telerik:RadMenuItem Header="Paste" Command="telerikGrid:RadGridViewCommands.Paste" CommandTarget="{Binding ElementName=rgvIsolateLookup}"/>
+                        <telerik:RadMenuItem IsSeparator="True" />
+                        <telerik:RadMenuItem Header="Delete cell" Name ="rmiDeleteCell" Command="{Binding DeleteTranslationCommand}"/>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn x:Name="idCol" Header="String Id" DataMemberBinding="{Binding StringId}" IsReadOnly="True" Width="100" TextAlignment="Right"/>
+                    <telerik:GridViewDataColumn x:Name="refCol" Header="Reference String" DataMemberBinding="{Binding ReferenceString,Mode=OneWay}" IsReadOnly="True" Width="*" TextWrapping="Wrap"/>
+                    <telerik:GridViewDataColumn x:Name="stringCol" Header="Translation" DataMemberBinding="{Binding String}" Width="*" TextWrapping="Wrap"/>
+                </telerik:RadGridView.Columns>
+            </telerik:RadGridView>
+            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
+                <TextBlock Text="{Binding DeviceXmlVersion}"/>
+                <TextBlock Margin="10,0" Text="{Binding DriveCustomizationSignature}"/>
+                <TextBlock Margin="10,0" Text="{Binding DriveCustomizationSignaturePre3570}"/>
+                <TextBlock Margin="10,0" Text="{Binding CompilerWarning}" Foreground="Red" ToolTip="For Drive Customization strings to work please ensure that the Codesys project is compiled using version 3.5.7.* or greater."/>
+            </StackPanel>
+            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
+                <TextBlock Text="Selected Items: "/>
+                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItems.Count,FallbackValue=99}" HorizontalAlignment="Right"/>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</UserControl>

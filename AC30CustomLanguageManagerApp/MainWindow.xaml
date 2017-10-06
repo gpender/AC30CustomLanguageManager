@@ -1,0 +1,13 @@
+﻿<Window x:Class="AC30CustomLanguageManagerApp.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:uc="clr-namespace:AC30CustomLanguageManager.Views;assembly=AC30CustomLanguageManager"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:AC30CustomLanguageManagerApp"
+        mc:Ignorable="d"
+        Title="AC30 Custom Language Manager (Desktop App) " Height="350" Width="740" Icon="Resources/Images/PC-Black.ico">
+    <Grid>
+        <uc:LanguageEditorUC></uc:LanguageEditorUC>
+    </Grid>
+</Window>
