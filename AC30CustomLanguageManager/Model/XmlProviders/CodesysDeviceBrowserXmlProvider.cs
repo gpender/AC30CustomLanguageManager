@@ -33,7 +33,7 @@ namespace AC30CustomLanguageManager.Model
                 {
                     fileLocation = openFileDialog.FileName;
                 }
-                return new FileStream(fileLocation, FileMode.Open); }
+                return new FileStream(fileLocation, FileMode.Open,FileAccess.Read); }
             set { xmlStream = value; }
         }
     }
