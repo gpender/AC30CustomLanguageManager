@@ -14,7 +14,7 @@ namespace AC30CustomLanguageManager.Model
         string LanguageStringProjectFileFilter = "AC30 Language Strings (*.ac30languages.xml) |*.ac30languages.xml| All Files (*.*)|*.*";
         string LanguageStringProjectFileExtension = "ac30languages.xml";
         List<int> languageNameStringIds = new List<int>() { 848, 849, 850, 851, 852, 1399, 1400, 1401, 1402, 1697 };
-        List<string> languageNameStrings = new List<string>() { "ENGLISH", "FRANCAIS", "DEUTSCH", "ITALIANO", "ESPANOL", "CHINESE", "L6", "L7", "L8", "L9" };
+        List<string> languageNameStrings = new List<string>() { "ENGLISH", "FRANCAIS", "DEUTSCH", "ESPANOL", "ITALIANO", "CHINESE", "L6", "L7", "L8", "L9" };
         Dictionary<int, Dictionary<int, string>> originalStringTranslations;
         List<ILanguage> languages = new List<ILanguage>();
 
