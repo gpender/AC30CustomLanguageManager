@@ -136,9 +136,15 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Interfaces\IRequestCloseViewModel.cs" />
+    <Compile Include="Interfaces\ICustomLanguageManager1.cs" />
     <Compile Include="Interfaces\ICustomLanguageManager.cs" />
+    <Compile Include="Interfaces\ICustomLanguageProject1.cs" />
     <Compile Include="Interfaces\ICustomLanguageProject.cs" />
+    <Compile Include="Interfaces\IDeviceStringReader1.cs" />
     <Compile Include="Interfaces\IDeviceStringReader.cs" />
+    <Compile Include="Interfaces\IDeviceXmlFile.cs" />
+    <Compile Include="Interfaces\IDeviceXmlProvider1.cs" />
     <Compile Include="Interfaces\IDeviceXmlProvider.cs" />
     <Compile Include="Interfaces\IDriveCustomizationStringReader.cs" />
     <Compile Include="Interfaces\IDriveCustomizationXmlProvider.cs" />
@@ -149,6 +155,7 @@
     <Compile Include="Interfaces\IReferenceStringProvider.cs" />
     <Compile Include="Interfaces\IStringsChangedNotifier.cs" />
     <Compile Include="Interfaces\ITranslation.cs" />
+    <Compile Include="Model\DeviceXmlFile.cs" />
     <Compile Include="Model\Language.cs" />
     <Compile Include="Model\StringsChangedNotifierEmptyClass.cs" />
     <Compile Include="Model\StringsChangedNotifier.cs" />
@@ -164,13 +171,21 @@
     <Compile Include="Model\XmlProviders\TestDeviceXmlProvider.cs" />
     <Compile Include="Model\Translation.cs" />
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
+    <Compile Include="ViewModels\DeviceXmlVM.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MyMultiSelectBehaviour.cs" />
     <Compile Include="ViewModels\ViewModelLocator.cs" />
+    <Compile Include="Views\DeviceXmlCW.xaml.cs">
+      <DependentUpon>DeviceXmlCW.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\LanguageEditorUC.xaml.cs">
       <DependentUpon>LanguageEditorUC.xaml</DependentUpon>
     </Compile>
     <Page Include="Resources\TelerikResourceDictionary.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DeviceXmlCW.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

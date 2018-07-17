@@ -9,7 +9,7 @@ using System.Windows;
 
 namespace AC30CustomLanguageManager.Model
 {
-    public class CustomLanguageProject : ICustomLanguageProject
+    public class CustomLanguageProject : ICustomLanguageProject1
     {
         string LanguageStringProjectFileFilter = "AC30 Language Strings (*.ac30languages.xml) |*.ac30languages.xml| All Files (*.*)|*.*";
         string LanguageStringProjectFileExtension = "ac30languages.xml";
@@ -50,10 +50,14 @@ namespace AC30CustomLanguageManager.Model
         }
         public void ImportDeviceXmlFile(IDeviceStringReader deviceStringReader, IDeviceXmlProvider deviceXmlProvider)
         {
+            throw new NotImplementedException();
+        }
+        public void ImportDeviceXmlFile(string fileLocation, IDeviceStringReader deviceStringReader, IDeviceXmlProvider deviceXmlProvider)
+        {
             SaveOriginalTranslations(false);
 
             ClearAllFixedTranslations();
-            AddLanguageStringCollection(deviceStringReader, deviceXmlProvider);
+            AddLanguageStringCollection(fileLocation, deviceStringReader, deviceXmlProvider);
 
             RestoreOriginalTranslations();
             DeviceXmlVersion = deviceStringReader.DeviceXmlVersion;
@@ -178,11 +182,11 @@ namespace AC30CustomLanguageManager.Model
         #endregion
         
         #region private methods
-        private void AddLanguageStringCollection(IDeviceStringReader deviceStringReader, IDeviceXmlProvider deviceXmlProvider)
+        private void AddLanguageStringCollection(string fileLocation, IDeviceStringReader deviceStringReader, IDeviceXmlProvider deviceXmlProvider)
         {
             try
             {
-                foreach (var languageStringCollection in deviceStringReader.GetStringsFromDeviceXml(deviceXmlProvider))
+                foreach (var languageStringCollection in ((IDeviceStringReader1)deviceStringReader).GetStringsFromDeviceXml(fileLocation,deviceXmlProvider))
                 {
                     ILanguageStringCollection matchingCollection = LanguageStringCollections.Where(lsc => lsc.Index == languageStringCollection.Index).FirstOrDefault();
                     if (matchingCollection != null)

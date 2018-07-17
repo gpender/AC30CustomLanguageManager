@@ -26,11 +26,13 @@
                             <telerik:RadMenuItem Header="New Language Project" Command="{Binding NewLanguageStringProjectCommand}"/>
                             <telerik:RadMenuItem Header="Open Language Project" Command="{Binding OpenLanguageStringProjectCommand}"/>
                             <telerik:RadMenuItem Header="Save language Project" Command="{Binding SaveLanguageStringProjectCommand}" />
-                            <telerik:RadMenuItem Header="Import Strings From Device Xml" Command="{Binding ImportDeviceXmlCommand}"/>
-                            <telerik:RadMenuItem Header="Import Strings From DriveCustomization" Command="{Binding ImportDriveCustomizationXmlCommand}"/>
+                            <telerik:RadMenuItem IsSeparator="True" Height="15" />
+                            <telerik:RadMenuItem Header="Import Fixed Strings" Command="{Binding ImportDeviceXmlCommand}"/>
+                            <telerik:RadMenuItem Header="Import DriveCustomization Strings" Command="{Binding ImportDriveCustomizationXmlCommand}"/>
+                            <telerik:RadMenuItem IsSeparator="True" />
                             <telerik:RadMenuItem Header="Language Files">
-                                <telerik:RadMenuItem Header="Create All Language File" Command="{Binding CreateLanguageFileCommand}" CommandParameter="All"/>
-                                <telerik:RadMenuItem Header="Create Selected Language File" Command="{Binding CreateLanguageFileCommand}" />
+                                <telerik:RadMenuItem Header="Create All Language Translation Files" Command="{Binding CreateLanguageFileCommand}" CommandParameter="All"/>
+                                <telerik:RadMenuItem Header="Create Selected Language Translation File" Command="{Binding CreateLanguageFileCommand}" />
                             </telerik:RadMenuItem>
                         </telerik:RadMenuItem>
                     </telerik:RadMenu>

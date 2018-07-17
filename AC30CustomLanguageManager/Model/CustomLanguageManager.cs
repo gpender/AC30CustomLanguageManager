@@ -6,17 +6,17 @@ using System.Linq;
 
 namespace AC30CustomLanguageManager.Model
 {
-    public class CustomLanguageManager : ICustomLanguageManager, IDisposable
+    public class CustomLanguageManager : ICustomLanguageManager1, IDisposable
     {
         public event EventHandler SourceDataChanged;
         bool disableEventRaising = false;
 
-        ICustomLanguageProject currentProject;
+        ICustomLanguageProject1 currentProject;
         ILanguageFileGenerator languageFileGenerator;
         ILanguageStringCollection selectedLanguageStringCollection;
         ILanguageStringCollection selectedReferenceStringCollection;
-        IDeviceStringReader deviceStringReader;
-        IDeviceXmlProvider deviceXmlProvider;
+        IDeviceStringReader1 deviceStringReader;
+        IDeviceXmlProvider1 deviceXmlProvider;
         IDriveCustomizationStringReader driveCustomizationStringReader;
         IDriveCustomizationXmlProvider driveCustomizationXmlProvider;
         IStringsChangedNotifier stringsChangedNotifier;
@@ -24,6 +24,10 @@ namespace AC30CustomLanguageManager.Model
         ILanguage selectedReferenceLanguage;
         bool editingLanguages;
 
+        public List<IDeviceXmlFile> AvailableDeviceXmlFiles
+        {
+            get { return deviceXmlProvider.AvailableDeviceXmlFiles; }
+        }
         public string CompilerWarning
         {
             get { return currentProject.CompilerWarning; }
@@ -95,8 +99,8 @@ namespace AC30CustomLanguageManager.Model
         }
         public CustomLanguageManager(IDeviceStringReader deviceStringReader, IDeviceXmlProvider deviceXmlProvider, IDriveCustomizationStringReader driveCustomizationStringReader, IDriveCustomizationXmlProvider driveCustomizationXmlProvider, ILanguageFileGenerator languageFileGenerator, IStringsChangedNotifier stringsChangedNotifier)
         {
-            this.deviceStringReader = deviceStringReader;
-            this.deviceXmlProvider = deviceXmlProvider;
+            this.deviceStringReader = deviceStringReader as IDeviceStringReader1;
+            this.deviceXmlProvider = deviceXmlProvider as IDeviceXmlProvider1;
             this.driveCustomizationStringReader = driveCustomizationStringReader;
             this.driveCustomizationXmlProvider = driveCustomizationXmlProvider;
             this.languageFileGenerator = languageFileGenerator;
@@ -118,7 +122,8 @@ namespace AC30CustomLanguageManager.Model
 
         private void StringsChangedNotifier_DeviceChanged(object sender, EventArgs e)
         {
-            ImportDeviceXmlFile();
+            throw new NotImplementedException();
+            //ImportDeviceXmlFile();
         }
 
         public void CreateLanguageFile(bool allLanguageFiles)
@@ -151,7 +156,11 @@ namespace AC30CustomLanguageManager.Model
         }
         public void ImportDeviceXmlFile()
         {
-            currentProject.ImportDeviceXmlFile(deviceStringReader, deviceXmlProvider);
+            throw new NotImplementedException();
+        }
+        public void ImportDeviceXmlFile(string fileLocation)
+        {
+            currentProject.ImportDeviceXmlFile(fileLocation, deviceStringReader, deviceXmlProvider);
             SetSelectedLanguageAndReferenceLanguage();
         }
 

@@ -7,7 +7,7 @@ using System.Xml.Linq;
 
 namespace AC30CustomLanguageManager.Model
 {
-    public class DeviceStringReader : IDeviceStringReader
+    public class DeviceStringReader : IDeviceStringReader1
     {
         public Version DeviceXmlVersion { get; private set; }
         public DeviceStringReader()
@@ -22,6 +22,16 @@ namespace AC30CustomLanguageManager.Model
             }
             return GetLanguagesFromStringsSection(deviceXmlProvider.NameSpace,doc);
         }
+        public IEnumerable<ILanguageStringCollection> GetStringsFromDeviceXml(string fileLocation, IDeviceXmlProvider deviceXmlProvider)
+        {
+            XDocument doc = null;
+            using (Stream stream = new FileStream(fileLocation, FileMode.Open, FileAccess.Read))
+            {
+                doc = XDocument.Load(stream);
+            }
+            return GetLanguagesFromStringsSection(deviceXmlProvider.NameSpace, doc);
+        }
+
         private IEnumerable<ILanguageStringCollection> GetLanguagesFromStringsSection(XNamespace nameSpace, XDocument doc)
         {
             bool englishStringsPresentInDeviceXml = doc.Descendants(nameSpace + "Strings").Descendants(nameSpace + "Language").Where(a => a.Attribute("lang").Value == "en").FirstOrDefault() != null;

@@ -11,6 +11,7 @@ using System.ComponentModel;
 using System.Windows.Data;
 using GalaSoft.MvvmLight.Command;
 using Parker.AP.Common.CustomLanguages;
+using AC30CustomLanguageManager.Views;
 
 namespace AC30CustomLanguageManager.ViewModels
 {
@@ -37,7 +38,7 @@ namespace AC30CustomLanguageManager.ViewModels
         ICommand openLanguageStringProjectCommand;
         ICommand saveLanguageStringProjectCommand;
 
-        ICustomLanguageManager customLanguageManager;
+        ICustomLanguageManager1 customLanguageManager;
         bool? stringTypeFilter;
         ObservableCollection<ITranslation> selectedItems = new ObservableCollection<ITranslation>();
         public string CompilerWarning
@@ -67,14 +68,6 @@ namespace AC30CustomLanguageManager.ViewModels
                 RaisePropertyChanged(() => StringTypeFilter);
                 SetFilter();
             }
-            //get { return editingLanguageNames; }
-            //set
-            //{
-            //    Set<bool>(() => EditingLanguageNames, ref editingLanguageNames, value);
-            //    stringTypeFilter = null;
-            //    RaisePropertyChanged(()=> StringTypeFilter);
-            //    SetFilter();
-            //}
         }
         public List<ILanguage> Languages
         {
@@ -128,11 +121,11 @@ namespace AC30CustomLanguageManager.ViewModels
         {
             if (IsInDesignMode)
             {
-                this.customLanguageManager = customLanguageManager;
+                this.customLanguageManager = customLanguageManager as ICustomLanguageManager1;
             }
             else
             {
-                this.customLanguageManager = customLanguageManager;
+                this.customLanguageManager = customLanguageManager as ICustomLanguageManager1;
                 this.customLanguageManager.SourceDataChanged += CustomLanguageManager_SourceDataChanged;
             }
         }
@@ -191,7 +184,10 @@ namespace AC30CustomLanguageManager.ViewModels
         private void ImportDeviceXml()
         {
             EditingLanguages = false;
-            customLanguageManager.ImportDeviceXmlFile();
+            DeviceXmlCW cw = new DeviceXmlCW();
+            DeviceXmlVM vm = new DeviceXmlVM(customLanguageManager);
+            cw.DataContext = vm;
+            cw.ShowDialog();
         }
         #endregion
 
