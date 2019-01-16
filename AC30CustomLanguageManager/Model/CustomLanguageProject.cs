@@ -24,6 +24,7 @@ namespace AC30CustomLanguageManager.Model
         public Version DeviceXmlVersion { get; private set; }
         public uint DriveCustomizationSignature { get; set; }
         public uint DriveCustomizationSignaturePre3570 { get; set; }
+        public string ProjectFileName { get; set; }
         public ushort FixedStringCount { get; set; }
         [XmlIgnore]
         public List<ILanguage> Languages
@@ -38,6 +39,7 @@ namespace AC30CustomLanguageManager.Model
         {
             DeviceXmlVersion = new Version(0, 0, 0, 0);
             InitializeLanguageStringCollections();
+            ProjectFileName = "MyProject";
         }
         public void ClearAllTranslations()
         {
@@ -101,6 +103,7 @@ namespace AC30CustomLanguageManager.Model
             if (openFileDialog.ShowDialog() == true)
             {
                 languageStringProjectFileName = openFileDialog.FileName;
+                ProjectFileName = new FileInfo(languageStringProjectFileName).Name;
                 XmlSerializer mySerializer = new XmlSerializer(typeof(CustomLanguageProject));
                 try
                 {
@@ -132,12 +135,14 @@ namespace AC30CustomLanguageManager.Model
         {
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.Filter = LanguageStringProjectFileFilter;
+            saveFileDialog.FileName = ProjectFileName;
             saveFileDialog.DefaultExt = LanguageStringProjectFileExtension;
 
             if (saveFileDialog.ShowDialog() == true)
             {
                 string saveFileName = saveFileDialog.FileName;
                 Serialize(saveFileName);
+                ProjectFileName = new FileInfo(saveFileName).Name;
             }
         }
         internal void Serialize(string saveFileName)

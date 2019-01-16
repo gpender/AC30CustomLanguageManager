@@ -1,4 +1,5 @@
-﻿using Parker.AP.Common.CustomLanguages;
+﻿using Microsoft.WindowsAPICodePack.Dialogs;
+using Parker.AP.Common.CustomLanguages;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -61,6 +62,10 @@ namespace AC30CustomLanguageManager.Model
         public List<ILanguageStringCollection> LanguageStringCollections
         {
             get { return currentProject.LanguageStringCollections; }
+        }
+        public string ProjectFileName
+        {
+            get { return currentProject.ProjectFileName; }
         }
         public ILanguageStringCollection SelectedLanguageStringCollection
         {
@@ -129,14 +134,12 @@ namespace AC30CustomLanguageManager.Model
         public void CreateLanguageFile(bool allLanguageFiles)
         {
             string outputFolder = @"c:\";
-            using (var dialog = new System.Windows.Forms.FolderBrowserDialog())
+            CommonOpenFileDialog dialog = new CommonOpenFileDialog();
+            //dialog.InitialDirectory = "C:\\Users";
+            dialog.IsFolderPicker = true;
+            if (dialog.ShowDialog() == CommonFileDialogResult.Ok)
             {
-                if (Directory.Exists(@"c:\temp"))
-                    dialog.SelectedPath = @"c:\temp";
-                else
-                    dialog.SelectedPath = @"c:\";
-                System.Windows.Forms.DialogResult result = dialog.ShowDialog();
-                outputFolder = dialog.SelectedPath;
+                outputFolder = dialog.FileName;
             }
             if (allLanguageFiles)
             {

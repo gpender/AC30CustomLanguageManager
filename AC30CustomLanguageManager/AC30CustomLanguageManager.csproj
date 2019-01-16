@@ -108,6 +108,12 @@
     <Reference Include="Microsoft.Practices.ServiceLocation, Version=1.3.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\CommonServiceLocator.1.3\lib\portable-net4+sl5+netcore45+wpa81+wp8\Microsoft.Practices.ServiceLocation.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Core.1.1.0\lib\Microsoft.WindowsAPICodePack.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.WindowsAPICodePack.Shell.1.1.0\lib\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
@@ -170,6 +176,7 @@
     <Compile Include="Model\ReferenceStringProvider.cs" />
     <Compile Include="Model\XmlProviders\TestDeviceXmlProvider.cs" />
     <Compile Include="Model\Translation.cs" />
+    <Compile Include="Resources\Converters\Converters.cs" />
     <Compile Include="ViewModels\Command\RelayCommand.cs" />
     <Compile Include="ViewModels\DeviceXmlVM.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
@@ -181,6 +188,10 @@
     <Compile Include="Views\LanguageEditorUC.xaml.cs">
       <DependentUpon>LanguageEditorUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="Resources\Converters.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Resources\TelerikResourceDictionary.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -241,6 +252,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\HA502487C013_0A.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

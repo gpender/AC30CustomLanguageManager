@@ -23,6 +23,7 @@ namespace AC30CustomLanguageManager.Model
             {
                 //return new FileStream(fileLocation, FileMode.Open);
                 OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.FileName = "Repository.xml";
                 //openFileDialog.Filter = languageStringProjectFileFilter;
                 //openFileDialog.DefaultExt = languageStringProjectFileExtension;
 

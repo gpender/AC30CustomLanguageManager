@@ -12,6 +12,7 @@ using System.Windows.Data;
 using GalaSoft.MvvmLight.Command;
 using Parker.AP.Common.CustomLanguages;
 using AC30CustomLanguageManager.Views;
+using System.IO;
 
 namespace AC30CustomLanguageManager.ViewModels
 {
@@ -37,6 +38,7 @@ namespace AC30CustomLanguageManager.ViewModels
         ICommand newLanguageStringProjectCommand;
         ICommand openLanguageStringProjectCommand;
         ICommand saveLanguageStringProjectCommand;
+        ICommand openLanguageFileAppNoteCommand;
 
         ICustomLanguageManager1 customLanguageManager;
         bool? stringTypeFilter;
@@ -68,6 +70,10 @@ namespace AC30CustomLanguageManager.ViewModels
                 RaisePropertyChanged(() => StringTypeFilter);
                 SetFilter();
             }
+        }
+        public string ProjectFileName
+        {
+            get { return customLanguageManager.ProjectFileName; }
         }
         public List<ILanguage> Languages
         {
@@ -262,6 +268,7 @@ namespace AC30CustomLanguageManager.ViewModels
         {
             EditingLanguages = false;
             customLanguageManager.NewCustomLanguageProject();
+            RaisePropertyChanged(() => ProjectFileName);
         }
 
         #endregion
@@ -288,6 +295,47 @@ namespace AC30CustomLanguageManager.ViewModels
         {
             EditingLanguages = false;
             customLanguageManager.OpenCustomLanguageProject();
+            RaisePropertyChanged(() => ProjectFileName);
+        }
+        #endregion
+
+        #region OpenLanguageFileAppNoteCommand
+
+        public ICommand OpenLanguageFileAppNoteCommand
+        {
+            get
+            {
+                if (openLanguageFileAppNoteCommand == null)
+                {
+                    openLanguageFileAppNoteCommand = new RelayCommand(OpenLanguageFileAppNote, CanOpenLanguageFileAppNote);
+                }
+                return openLanguageFileAppNoteCommand;
+            }
+        }
+        private bool CanOpenLanguageFileAppNote()
+        {
+            return true;
+        }
+
+        private void OpenLanguageFileAppNote()
+        {
+            MemoryStream memoryStream = new MemoryStream(Properties.Resources.HA502487C013_0A);
+            var filename = $"{Path.GetTempPath()}/HA502487C013_0A.pdf";
+
+            using (Stream file = File.Create(filename))
+            {
+                CopyStream(memoryStream, file);
+                System.Diagnostics.Process.Start(filename);
+            }
+        }
+        public void CopyStream(Stream input, Stream output)
+        {
+            byte[] buffer = new byte[8 * 1024];
+            int len;
+            while ((len = input.Read(buffer, 0, buffer.Length)) > 0)
+            {
+                output.Write(buffer, 0, len);
+            }
         }
         #endregion
 
@@ -312,6 +360,7 @@ namespace AC30CustomLanguageManager.ViewModels
         private void SaveLanguageStringProject()
         {
             customLanguageManager.SaveCustomLanguageProject();
+            RaisePropertyChanged(() => ProjectFileName);
         }
 
         #endregion

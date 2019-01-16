@@ -7,13 +7,14 @@
              xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
              xmlns:telerikGrid="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.GridView"
              xmlns:vm="clr-namespace:AC30CustomLanguageManager.ViewModels"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="300" d:DesignWidth="600">
     <UserControl.Resources>
         <ResourceDictionary>
             <vm:ViewModelLocator x:Key="Locator" d:IsDataSource="True" />
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/AC30CustomLanguageManager;component/Resources/TelerikResourceDictionary.xaml"/>
+                <ResourceDictionary Source="/AC30CustomLanguageManager;component/Resources/Converters.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </UserControl.Resources>
@@ -29,6 +30,8 @@
                             <telerik:RadMenuItem IsSeparator="True" Height="15" />
                             <telerik:RadMenuItem Header="Import Fixed Strings" Command="{Binding ImportDeviceXmlCommand}"/>
                             <telerik:RadMenuItem Header="Import DriveCustomization Strings" Command="{Binding ImportDriveCustomizationXmlCommand}"/>
+                            <telerik:RadMenuItem IsSeparator="True" />
+                            <telerik:RadMenuItem Header="Language Files Application Note" Command="{Binding OpenLanguageFileAppNoteCommand}"/>
                             <telerik:RadMenuItem IsSeparator="True" />
                             <telerik:RadMenuItem Header="Language Files">
                                 <telerik:RadMenuItem Header="Create All Language Translation Files" Command="{Binding CreateLanguageFileCommand}" CommandParameter="All"/>
@@ -79,20 +82,17 @@
                 </telerik:RadComboBox>
             </StackPanel>
         </Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"/>
-                <ColumnDefinition Width="89*"/>
-            </Grid.ColumnDefinitions>
+        <Grid DockPanel.Dock="Top">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
             <telerik:RadGridView x:Name="grid1" GroupRenderMode="Flat" ItemsSource="{Binding SelectedTranslationsView}" Margin="0" 
-                                 SelectionUnit="Mixed"
-                                 SelectionMode="Extended"
-                                 ClipboardCopyMode="Cells"
-                                 ClipboardPasteMode="AllSelectedCells" 
+                            SelectionUnit="Mixed"
+                            SelectionMode="Extended"
+                            ClipboardCopyMode="Cells"
+                            ClipboardPasteMode="AllSelectedCells" 
                             BorderBrush="Gray"
                             ShowGroupPanel="False"
                             BorderThickness="1"
@@ -129,16 +129,28 @@
                     <telerik:GridViewDataColumn x:Name="stringCol" Header="Translation" DataMemberBinding="{Binding String}" Width="*" TextWrapping="Wrap"/>
                 </telerik:RadGridView.Columns>
             </telerik:RadGridView>
-            <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.ColumnSpan="2">
-                <TextBlock Text="{Binding DeviceXmlVersion}"/>
-                <TextBlock Margin="10,0" Text="{Binding DriveCustomizationSignature}"/>
-                <TextBlock Margin="10,0" Text="{Binding DriveCustomizationSignaturePre3570}"/>
-                <TextBlock Margin="10,0" Text="{Binding CompilerWarning}" Foreground="Red" ToolTip="For Drive Customization strings to work please ensure that the Codesys project is compiled using version 3.5.7.* or greater."/>
-            </StackPanel>
-            <StackPanel Grid.Row="1" Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                <TextBlock Text="Selected Items: "/>
-                <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding SelectedItems.Count,FallbackValue=99}" HorizontalAlignment="Right"/>
-            </StackPanel>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <TextBlock Margin="5,0" Text="AC30 Device Version:" FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding DeviceXmlVersion}"/>
+                    <TextBlock Margin="10,0,5,0" Text="Signature:" FontWeight="SemiBold" ToolTip="When using Drive Customization the signature must match the current signature inside the AC30 drive.  Any changes to the Drive Customization will affect the signature in the drive: reimport the repository after any changes to Drive Customization"/>
+                    <TextBlock Text="{Binding DriveCustomizationSignature}" ToolTip="When using Drive Customization the signature must match the current signature inside the AC30 drive.  Any changes to the Drive Customization will affect the signature in the drive: reimport the repository after any changes to Drive Customization"/>
+                    <!--<TextBlock Text="{Binding DriveCustomizationSignature,StringFormat={}0x{0:X8}}"/>-->
+                    <!--<TextBlock Margin="10,0,5,0" Text="Signature (Pre3570):"/>
+                    <TextBlock Margin="5,0" Text="{Binding DriveCustomizationSignaturePre3570,StringFormat={}0x{0:X8}}"/>-->
+                    <TextBlock Margin="5,0" Text="{Binding CompilerWarning}" Foreground="Red" ToolTip="For Drive Customization strings to work please ensure that the Codesys project is compiled using version 3.5.7.* or greater."/>
+                </StackPanel>
+                <TextBlock Grid.Column="1" Text="{Binding ProjectFileName}"/>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <TextBlock Text="Selected Items: " FontWeight="SemiBold"/>
+                    <TextBlock Text="{Binding SelectedItems.Count,FallbackValue=99}"/>
+                </StackPanel>
+            </Grid>            
         </Grid>
     </DockPanel>
 </UserControl>

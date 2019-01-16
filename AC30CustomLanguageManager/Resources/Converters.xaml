@@ -1,0 +1,10 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:AC30CustomLanguageManager.Resources"
+                    xmlns:conv="clr-namespace:AC30CustomLanguageManager.Resources.Converters">
+    <conv:VisToBool x:Key="TrueIfVisible" Inverted="false" Not="false" />
+    <conv:VisToBool x:Key="TrueIfNotVisible" Inverted="false" Not="true" />
+    <conv:VisToBool x:Key="VisibleIfTrue" Inverted="true" Not="false" />
+    <conv:VisToBool x:Key="VisibleIfNotTrue" Inverted="true" Not="true" />
+
+</ResourceDictionary>
