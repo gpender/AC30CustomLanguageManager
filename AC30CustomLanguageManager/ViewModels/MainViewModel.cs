@@ -319,8 +319,8 @@ namespace AC30CustomLanguageManager.ViewModels
 
         private void OpenLanguageFileAppNote()
         {
-            MemoryStream memoryStream = new MemoryStream(Properties.Resources.HA502487C013_0A);
-            var filename = $"{Path.GetTempPath()}/HA502487C013_0A.pdf";
+            MemoryStream memoryStream = new MemoryStream(Properties.Resources.HA502487C013_0B);
+            var filename = $"{Path.GetTempPath()}/HA502487C013_0B.pdf";
 
             using (Stream file = File.Create(filename))
             {

@@ -63,9 +63,9 @@ namespace AC30CustomLanguageManager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] HA502487C013_0A {
+        internal static byte[] HA502487C013_0B {
             get {
-                object obj = ResourceManager.GetObject("HA502487C013_0A", resourceCulture);
+                object obj = ResourceManager.GetObject("HA502487C013_0B", resourceCulture);
                 return ((byte[])(obj));
             }
         }

@@ -252,7 +252,7 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <None Include="Resources\HA502487C013_0A.pdf" />
+    <None Include="Resources\HA502487C013_0B.pdf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
